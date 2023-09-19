@@ -40,6 +40,9 @@ char **_split(char *str, char *lim);
 void	free_split(char **arr);
 void	fd_putstr(char *str, int fd);
 void	putError(char *s1, char *s2);
+void readFile(data_t *data);
+char *_strjoin(char *s1, char *s2);
+
 /**
  * struct data_s - my all data
  * @fd: the file descriptor of bytecode file
@@ -53,6 +56,7 @@ typedef struct data_s
 	int	fd;
 	stack_t	*stack;
 	instruction_t	*exec;
+	char *content;
 } data_t;
 
 #endif /* _MONTY_H_ */

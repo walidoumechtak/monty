@@ -49,5 +49,6 @@ int main(int ac, char **av)
 		fd_putstr("USAGE: monty file\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	runByteCode();
+	readFile(data);
+	runByteCode(data);
 }
