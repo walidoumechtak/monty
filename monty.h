@@ -40,4 +40,19 @@ char **_split(char *str, char *lim);
 void	free_split(char **arr);
 void	fd_putstr(char *str, int fd);
 
+/**
+ * struct data_s - my all data
+ * @fd: the file descriptor of bytecode file
+ * @stack: the stack
+ * @exec: the opcode
+ * Description: all data needed
+ */
+
+typedef struct data_s
+{
+	int	fd;
+	stack_t	*stack;
+	instruction_t	*exec;
+} data_t;
+
 #endif /* _MONTY_H_ */
