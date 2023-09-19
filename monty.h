@@ -39,7 +39,7 @@ typedef struct instruction_s
 char **_split(char *str, char *lim);
 void	free_split(char **arr);
 void	fd_putstr(char *str, int fd);
-
+void	putError(char *s1, char *s2);
 /**
  * struct data_s - my all data
  * @fd: the file descriptor of bytecode file
