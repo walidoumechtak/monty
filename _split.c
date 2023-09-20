@@ -14,7 +14,7 @@ int	size_string(char *str, char *lim)
 
 	if (!str)
 		return (0);
-	str = strdup(str);
+	str = _strdup(str);
 	cpt = 0;
 	temp = strtok(str, lim);
 	while (temp != NULL)
@@ -43,11 +43,11 @@ char **_split(char *str, char *lim)
 	i = 0;
 	words = size_string(str, lim);
 	arr = malloc(sizeof(char *) * (words + 1));
-	str = strdup(str);
+	str = _strdup(str);
 	temp = strtok(str, lim);
 	while (temp != NULL)
 	{
-		arr[i] = strdup(temp);
+		arr[i] = _strdup(temp);
 		i++;
 		temp = strtok(NULL, lim);
 	}
