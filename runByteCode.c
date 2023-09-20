@@ -7,15 +7,25 @@
 
 void	runByteCode(data_t *data)
 {
-	char **opcodes;
+	char **opCodes;
+	char **opCode;
 	int	i;
 
 	i = 0;
-	opcodes = _split(data->content, "\n");
-	while (opcodes[i])
+	opCodes = _split(data->content, "\n");
+	data->exec = malloc(sizeof(instruction_t));
+	if (!data->exec)
 	{
-		printf("%d - %s\n", i + 1, opcodes[i]);
-		i++;
+		fd_putstr("Error: malloc failed\n", 2);
+		free(data->exec);
+		exit(EXIT_FAILURE);
 	}
-	free_split(opcodes);
+	while (opCodes[i])
+	{
+		opCode = _split(opCodes[i], " ");
+		printf("opcde: %s, the value: %s\n", opCode[0], opCode[1]);
+		i++;
+		free_split(opCode);
+	}
+	free_split(opCodes);
 }

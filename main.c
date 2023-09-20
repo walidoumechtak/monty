@@ -9,12 +9,10 @@
 void	initData(data_t * data, char **av)
 {
         data->stack = malloc(sizeof(stack_t));
-        data->exec = malloc(sizeof(instruction_t));
-        if (!data->stack || !data->exec)
+        if (!data->stack)
         {
                 fd_putstr("Error: malloc failed\n", 2);
                 free(data->stack);
-                free(data->exec);
                 exit(EXIT_FAILURE);
         }
 	data->fd = open(av[1], O_RDONLY, 0644);
