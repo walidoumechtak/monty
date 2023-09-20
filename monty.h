@@ -64,5 +64,6 @@ char *_strjoin(char *s1, char *s2);
 char	*_strdup(char *str);
 void	free_list(data_t *data);
 void	runByteCode(data_t *data);
+void    free_ressource(data_t *data);
 
 #endif /* _MONTY_H_ */

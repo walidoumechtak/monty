@@ -17,13 +17,27 @@ void	runByteCode(data_t *data)
 	if (!data->exec)
 	{
 		fd_putstr("Error: malloc failed\n", 2);
-		free(data->exec);
+		free_ressource(data);
 		exit(EXIT_FAILURE);
 	}
 	while (opCodes[i])
 	{
 		opCode = _split(opCodes[i], " ");
-		printf("opcde: %s, the value: %s\n", opCode[0], opCode[1]);
+		data->exec->opcode = opCode[0];
+		if (strcmp(opCode[0], "push") == 0)
+			data->exec->f = push(stack, i + 1);
+		else if (strcmp(opCode[0], "pall") == 0)
+			data->exec->f = pall(stack, i + 1);
+		else
+		{
+			fd_putstr("L", 2);
+			write(2, ((i + 1) + '0'), 1);
+			putError(": unknown instruction ", opCode[0]);
+			free_split(opCode);
+			free_split(opCodes);
+			free_ressource(data);
+			exit(EXIT_FAILURE);
+		}
 		i++;
 		free_split(opCode);
 	}
