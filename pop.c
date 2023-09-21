@@ -17,6 +17,7 @@ void	pop(stack_t **stack, int line_number)
 		c = (line_number + 1) + '0';
 		write(2, &c, 1);
 		fd_putstr(": can't pop an empty stack\n", 2);
+		exit(EXIT_FAILURE);
 	}
 	else if (len_list(*stack) == 1)
 	{
