@@ -24,8 +24,6 @@ int	checkIsDigit(char *str)
 /**
  * invalidOpCode - exit if opcode is invalid
  * @data: my data
- * @opCodes: opcodes
- * @opCode: the opcode
  * @i: the line number
  * @cnt: the cntroll for error
  */
@@ -47,6 +45,12 @@ void	invalidOpCode(data_t *data, int i, int cnt)
 	exit(EXIT_FAILURE);
 }
 
+/**
+ * cases - all cases of opcod
+ * @data: my data
+ * @i: line number
+ */
+
 void	cases(data_t *data, int i)
 {
 	if (strcmp(data->opCode[0], "push") == 0)
@@ -54,10 +58,10 @@ void	cases(data_t *data, int i)
 		if (data->opCode[1] == NULL || checkIsDigit(data->opCode[1]) == 0)
 			invalidOpCode(data, i, 1);
 		data->exec->f = push;
-  	}
-  	else if (strcmp(data->opCode[0], "pall") == 0)
+	}
+	else if (strcmp(data->opCode[0], "pall") == 0)
 		data->exec->f = pall;
-  	else if (strcmp(data->opCode[0], "pint") == 0)
+	else if (strcmp(data->opCode[0], "pint") == 0)
 		data->exec->f = pint;
 	else if (strcmp(data->opCode[0], "pop") == 0)
 		data->exec->f = pop;
@@ -66,7 +70,7 @@ void	cases(data_t *data, int i)
 	if (data->opCode[1])
 		data->exec->f(&data->stack, atoi(data->opCode[1]));
 	else
-       		data->exec->f(&data->stack, i);
+		data->exec->f(&data->stack, i);
 }
 
 /**
