@@ -70,6 +70,8 @@ void	cases(data_t *data, int i)
 		data->exec->f = pop;
 	else if (strcmp(data->opCode[0], "nop") == 0)
 		temp = 0;
+	else if (strcmp(data->opCode[0], "swap") == 0)
+		data->exec->f = swap;
 	else
 		invalidOpCode(data, i, 0);
 	if (temp == 1)
