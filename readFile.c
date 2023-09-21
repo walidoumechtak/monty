@@ -21,8 +21,8 @@ void readFile(data_t *data)
 	while (read_size > 0)
 	{
 		read_size = read(data->fd, buffer, 1024);
-		if (read_size < 0)
-			exit(EXIT_FAILURE);
+		if (read_size <= 0)
+			break;
 		buffer[read_size] = '\0';
 		temp = _strjoin(res, buffer);
 		free(res);
