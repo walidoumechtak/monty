@@ -8,13 +8,14 @@
 
 void	initData(data_t * data, char **av)
 {
-        data->stack = malloc(sizeof(stack_t));
+        /*data->stack = malloc(sizeof(stack_t));
         if (!data->stack)
         {
                 fd_putstr("Error: malloc failed\n", 2);
                 free(data->stack);
                 exit(EXIT_FAILURE);
-        }
+        }*/
+	data->stack = NULL;
 	data->fd = open(av[1], O_RDONLY, 0644);
 	if (data->fd < 0)
 	{

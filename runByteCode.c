@@ -1,6 +1,24 @@
 #include "monty.h"
 
 /**
+ * invalidOpCode - exit if opcode is invalid
+ * @data: my data
+ * @opCodes: opcodes
+ * @opCode: the opcode
+ */
+
+void	invalidOpCode(data_t *data, char **opCodes, char ** opCode)
+{
+	fd_putstr("L", 2);
+	write(2, ((i + 1) + '0'), 1);
+	putError(": unknown instruction ", opCode[0]);
+	free_split(opCode);
+	free_split(opCodes);
+	free_ressource(data);
+	exit(EXIT_FAILURE);
+}
+
+/**
  * runByteCode - run the byte code
  * @data: my all data
  */
@@ -29,15 +47,7 @@ void	runByteCode(data_t *data)
 		else if (strcmp(opCode[0], "pall") == 0)
 			data->exec->f = pall(stack, i + 1);
 		else
-		{
-			fd_putstr("L", 2);
-			write(2, ((i + 1) + '0'), 1);
-			putError(": unknown instruction ", opCode[0]);
-			free_split(opCode);
-			free_split(opCodes);
-			free_ressource(data);
-			exit(EXIT_FAILURE);
-		}
+			invalidOpCode(data, opCodes, opCode);
 		i++;
 		free_split(opCode);
 	}
