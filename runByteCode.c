@@ -67,7 +67,7 @@ void	cases(data_t *data, int i)
 		data->exec->f = pop;
 	else if (strcmp(data->opCode[0], "nop") == 0)
 	{
-		return;
+		exit(0);
 	}	
 	else
 		invalidOpCode(data, i, 0);
