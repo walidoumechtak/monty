@@ -1,6 +1,27 @@
 #include "monty.h"
 
 /**
+ * checkIsDigit - check if a string is digit
+ * @str: the string
+ * Return: 1 if all is digit 0 if not
+ */
+
+int	checkIsDigit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (isdigit(str[i]))
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+/**
  * invalidOpCode - exit if opcode is invalid
  * @data: my data
  * @opCodes: opcodes
@@ -47,7 +68,11 @@ void	runByteCode(data_t *data)
 		opCode = _split(opCodes[i], " ");
 		data->exec->opcode = opCode[0];
 		if (strcmp(opCode[0], "push") == 0)
+		{
+			if (opCode[1] == NULL || checkIsDigit(opCode[1]) == 0)
+				invalidOpCode(data, opCodes, opCode, i);
 			data->exec->f = push;
+		}
 		else if (strcmp(opCode[0], "pall") == 0)
 			data->exec->f = pall;
 		else
