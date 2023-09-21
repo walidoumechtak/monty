@@ -30,7 +30,7 @@ int	checkIsDigit(char *str)
  * @cnt: the cntroll for error
  */
 
-void	invalidOpCode(data_t *data, char **opCodes, char **opCode, int i, int cnt)
+void	invalidOpCode(data_t *data, int i, int cnt)
 {
 	char	c;
 
@@ -38,13 +38,34 @@ void	invalidOpCode(data_t *data, char **opCodes, char **opCode, int i, int cnt)
 	fd_putstr("L", 2);
 	write(2, &c, 1);
 	if (cnt == 0)
-		putError(": unknown instruction ", opCode[0]);
+		putError(": unknown instruction ", data->opCode[0]);
 	else if (cnt == 1)
 		fd_putstr(": usage: push integer\n", 2);
-	free_split(opCode);
-	free_split(opCodes);
+	free_split(data->opCode);
+	free_split(data->opCodes);
 	free_ressource(data);
 	exit(EXIT_FAILURE);
+}
+
+void	casese(data_t *data, int i)
+{
+	 if (strcmp(data->opCode[0], "push") == 0)
+                {
+                        if (data->opCode[1] == NULL || checkIsDigit(data->opCode[1]) == 0)
+                                invalidOpCode(data, i, 1);
+                        data->exec->f = push;
+                }
+                else if (strcmp(data->opCode[0], "pall") == 0)
+                        data->exec->f = pall;
+                else if (strcmp(data->opCode[0], "pint") == 0)
+                        data->exec->f = pint;
+	 else
+			invalidOpCode(data, i, 0);
+		if (data->opCode[1])
+			data->exec->f(&data->stack, atoi(data->opCode[1]));
+		else
+       			data->exec->f(&data->stack, i);
+
 }
 
 /**
@@ -54,12 +75,10 @@ void	invalidOpCode(data_t *data, char **opCodes, char **opCode, int i, int cnt)
 
 void	runByteCode(data_t *data)
 {
-	char **opCodes;
-	char **opCode;
 	int	i;
 
 	i = 0;
-	opCodes = _split(data->content, "\n");
+	data->opCodes = _split(data->content, "\n");
 	data->exec = malloc(sizeof(instruction_t));
 	if (!data->exec)
 	{
@@ -67,28 +86,28 @@ void	runByteCode(data_t *data)
 		free_ressource(data);
 		exit(EXIT_FAILURE);
 	}
-	while (opCodes[i])
+	while (data->opCodes[i])
 	{
-		opCode = _split(opCodes[i], " ");
-		data->exec->opcode = opCode[0];
-		if (strcmp(opCode[0], "push") == 0)
+		data->opCode = _split(data->opCodes[i], " ");
+		data->exec->opcode = data->opCode[0];
+		if (strcmp(data->opCode[0], "push") == 0)
 		{
-			if (opCode[1] == NULL || checkIsDigit(opCode[1]) == 0)
-				invalidOpCode(data, opCodes, opCode, i, 1);
+			if (data->opCode[1] == NULL || checkIsDigit(data->opCode[1]) == 0)
+				invalidOpCode(data, i, 1);
 			data->exec->f = push;
 		}
-		else if (strcmp(opCode[0], "pall") == 0)
+		else if (strcmp(data->opCode[0], "pall") == 0)
 			data->exec->f = pall;
-		else if (strcmp(opCode[0], "pint") == 0)
+		else if (strcmp(data->opCode[0], "pint") == 0)
 			data->exec->f = pint;
 		else
-			invalidOpCode(data, opCodes, opCode, i, 0);
-		if (opCode[1])
-			data->exec->f(&data->stack, atoi(opCode[1]));
+			invalidOpCode(data, i, 0);
+		if (data->opCode[1])
+			data->exec->f(&data->stack, atoi(data->opCode[1]));
 		else
 			data->exec->f(&data->stack, i);
 		i++;
-		free_split(opCode);
+		free_split(data->opCode);
 	}
-	free_split(opCodes);
+	free_split(data->opCodes);
 }
