@@ -46,6 +46,8 @@ typedef struct instruction_s
  * @stack: the stack
  * @exec: the opcode
  * @content: the content of the file
+ * @opCodes: the instructions
+ * @opCode: the type of instruction
  * Description: all data needed
  */
 
@@ -55,6 +57,8 @@ typedef struct data_s
 	stack_t	*stack;
 	instruction_t	*exec;
 	char *content;
+	char **opCodes;
+	char **opCode;
 } data_t;
 
 char **_split(char *str, char *lim);
@@ -71,4 +75,6 @@ void	push(stack_t **stack, int line_number);
 void	pall(stack_t **stack, int line_number);
 int     len_list(stack_t *stack);
 void	pint(stack_t **stack, int line_number);
+void	pop(stack_t **stack, int line_number);
+
 #endif /* _MONTY_H_ */
