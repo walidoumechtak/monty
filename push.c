@@ -9,9 +9,7 @@
 void	push(stack_t **stack, int line_number)
 {
 	stack_t	*new;
-	stack_t	*temp;
 
-	temp = *stack;
 	new = malloc(sizeof(stack_t));
         if (!new)
         {
@@ -23,14 +21,12 @@ void	push(stack_t **stack, int line_number)
 	new->prev = NULL;
 	if (stack == NULL)
 		stack = &new;
-	else if (temp == NULL)
-	{
+	else if (*stack == NULL)
 		*stack = new;
-	}
 	else
 	{
-		temp = (*stack)->next;
 		(*stack)->prev = new;
 		new->next = *stack;
+		*stack = new;
 	}
 }

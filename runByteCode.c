@@ -51,7 +51,10 @@ void	runByteCode(data_t *data)
 			data->exec->f = pall;
 		else
 			invalidOpCode(data, opCodes, opCode, i);
-		data->exec->f(&data->stack, atoi(opCode[1]));
+		if (opCode[1])
+			data->exec->f(&data->stack, atoi(opCode[1]));
+		else
+			data->exec->f(&data->stack, 0);
 		i++;
 		free_split(opCode);
 	}

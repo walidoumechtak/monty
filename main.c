@@ -49,7 +49,7 @@ int main(int ac, char **av)
 	initData(data, av);
 	readFile(data);
 	runByteCode(data);
-	free(data->stack);
+	free_list(data);
 	free(data->exec);
 	free(data->content);
 	free(data);
