@@ -7,10 +7,13 @@
  * @opCode: the opcode
  */
 
-void	invalidOpCode(data_t *data, char **opCodes, char ** opCode)
+void	invalidOpCode(data_t *data, char **opCodes, char ** opCode, int i)
 {
+	char	c;
+
+	c = (i + 1) + '0';
 	fd_putstr("L", 2);
-	write(2, ((i + 1) + '0'), 1);
+	write(2, &c, 1);
 	putError(": unknown instruction ", opCode[0]);
 	free_split(opCode);
 	free_split(opCodes);
@@ -43,11 +46,12 @@ void	runByteCode(data_t *data)
 		opCode = _split(opCodes[i], " ");
 		data->exec->opcode = opCode[0];
 		if (strcmp(opCode[0], "push") == 0)
-			data->exec->f = push(stack, i + 1);
+			data->exec->f = push;
 		else if (strcmp(opCode[0], "pall") == 0)
-			data->exec->f = pall(stack, i + 1);
+			data->exec->f = pall;
 		else
-			invalidOpCode(data, opCodes, opCode);
+			invalidOpCode(data, opCodes, opCode, i);
+		data->exec->f(&data->stack, atoi(opCode[1]));
 		i++;
 		free_split(opCode);
 	}

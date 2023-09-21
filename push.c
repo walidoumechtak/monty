@@ -6,7 +6,7 @@
  * @line_number: the number of the line where push exist
  */
 
-void	push(stack_t **stack, unsigned int line_number)
+void	push(stack_t **stack, int line_number)
 {
 	stack_t	*new;
 	stack_t	*temp;
@@ -18,12 +18,19 @@ void	push(stack_t **stack, unsigned int line_number)
                 fd_putstr("Error: malloc failed\n", 2);
                 exit(EXIT_FAILURE);
         }
-	new->n = 
+	new->n = line_number;
+	new->next = NULL;
+	new->prev = NULL;
 	if (stack == NULL)
 		stack = &new;
+	else if (temp == NULL)
+	{
+		*stack = new;
+	}
 	else
 	{
-		while (temp->next)
-			temp = temp->next;
-	}	
+		temp = (*stack)->next;
+		(*stack)->prev = new;
+		new->next = *stack;
+	}
 }
