@@ -79,12 +79,14 @@ void	runByteCode(data_t *data)
 		}
 		else if (strcmp(opCode[0], "pall") == 0)
 			data->exec->f = pall;
+		else if (strcmp(opCode[0], "pint") == 0)
+			data->exec->f = pint;
 		else
 			invalidOpCode(data, opCodes, opCode, i, 0);
 		if (opCode[1])
 			data->exec->f(&data->stack, atoi(opCode[1]));
 		else
-			data->exec->f(&data->stack, 0);
+			data->exec->f(&data->stack, i);
 		i++;
 		free_split(opCode);
 	}
