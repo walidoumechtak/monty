@@ -45,6 +45,7 @@ int main(int ac, char **av)
 	free_list(data);
 	free(data->exec);
 	free(data->content);
+	close(data->fd);
 	free(data);
 	return (0);
 }
