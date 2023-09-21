@@ -27,6 +27,7 @@ int	checkIsDigit(char *str)
  * @opCodes: opcodes
  * @opCode: the opcode
  * @i: the line number
+ * @cnt: the cntroll for error
  */
 
 void	invalidOpCode(data_t *data, char **opCodes, char **opCode, int i, int cnt)
