@@ -5,9 +5,10 @@
  * @data: my data
  * @opCodes: opcodes
  * @opCode: the opcode
+ * @i: the line number
  */
 
-void	invalidOpCode(data_t *data, char **opCodes, char ** opCode, int i)
+void	invalidOpCode(data_t *data, char **opCodes, char **opCode, int i)
 {
 	char	c;
 

@@ -44,6 +44,7 @@ typedef struct instruction_s
  * @fd: the file descriptor of bytecode file
  * @stack: the stack
  * @exec: the opcode
+ * @content: the content of the file
  * Description: all data needed
  */
 

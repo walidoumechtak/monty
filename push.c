@@ -11,11 +11,11 @@ void	push(stack_t **stack, int line_number)
 	stack_t	*new;
 
 	new = malloc(sizeof(stack_t));
-        if (!new)
-        {
-                fd_putstr("Error: malloc failed\n", 2);
-                exit(EXIT_FAILURE);
-        }
+	if (!new)
+	{
+		fd_putstr("Error: malloc failed\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	new->n = line_number;
 	new->next = NULL;
 	new->prev = NULL;

@@ -3,7 +3,7 @@
 /**
  * size_string - how many word in a string
  * @str: the string to search
- * @c: the delimiter of word
+ * @lim: the delimiter of word
  * Return: the length
  */
 
