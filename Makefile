@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror -pedantic -std=c89 #-fsanitize=address -g3
+CFLAGS= -Wall -Wextra -Werror -pedantic -std=c89 -fsanitize=address -g3
 NAME= monty
 
 SRC = main.c readFile.c putError.c _strdup.c _strjoin.c _split.c fd_putstr.c free_split.c\

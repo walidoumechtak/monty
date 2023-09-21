@@ -9,7 +9,7 @@ void	free_list(data_t *data)
 {
 	stack_t	*temp;
 
-	while (data->stack->next)
+	while (data->stack)
 	{
 		temp = data->stack->next;
 		free(data->stack);
