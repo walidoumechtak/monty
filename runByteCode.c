@@ -53,6 +53,9 @@ void	invalidOpCode(data_t *data, int i, int cnt)
 
 void	cases(data_t *data, int i)
 {
+	int	temp;
+
+	temp = 1;
 	if (strcmp(data->opCode[0], "push") == 0)
 	{
 		if (data->opCode[1] == NULL || checkIsDigit(data->opCode[1]) == 0)
@@ -66,15 +69,16 @@ void	cases(data_t *data, int i)
 	else if (strcmp(data->opCode[0], "pop") == 0)
 		data->exec->f = pop;
 	else if (strcmp(data->opCode[0], "nop") == 0)
-	{
-		exit(0);
-	}	
+		temp = 0;
 	else
 		invalidOpCode(data, i, 0);
-	if (data->opCode[1])
-		data->exec->f(&data->stack, atoi(data->opCode[1]));
-	else
-		data->exec->f(&data->stack, i);
+	if (temp == 1)
+	{
+		if (data->opCode[1])
+			data->exec->f(&data->stack, atoi(data->opCode[1]));
+		else
+			data->exec->f(&data->stack, i);
+	}
 }
 
 /**
